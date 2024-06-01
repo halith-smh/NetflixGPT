@@ -9,6 +9,8 @@ export const API_OPTIONS = {
   },
 };
 
+export const FIREBASE_API = process.env.FIREBASE_API;
+export const FIREBASE_APP_ID = process.env.FIREBASE_APP_ID;
 export const GUEST_ID = {email: "guest@netflix.com", password: "Password@1234"};
 
 
