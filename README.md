@@ -42,8 +42,11 @@ NetflixGPT is a web application designed to provide movie suggestions using TMDB
 ## Usage
 1. Create a `.env` file in the root directory and add your API keys:
     ```plaintext
-    REACT_APP_TMDB_API_KEY=your_tmdb_api_key
-    REACT_APP_GEMINI_API_KEY=your_gemini_api_key
+    FIREBASE_API=
+    FIREBASE_APP_ID=
+    REACT_APP_GEMINI_API_KEY=
+    REACT_APP_OMDB_KEY=
+    REACT_APP_TMDB_KEY=
     ```
 2. Start the development server:
     ```bash
