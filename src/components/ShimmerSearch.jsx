@@ -1,11 +1,17 @@
 import React from "react";
+import texts from "../lang/text";
+import { useSelector } from "react-redux";
+
 
 const ShimmerSearch = () => {
+
+  const lang = useSelector((store) => store.global.lang);
+
   return (
     <div className="bg-gradient-to-t from-[#141414]">
       <div role="status" className="px-5 md:px-16 animate-pulse">
         <h1 className="text-xl md:text-2xl font-bold py-4">
-          Looking for movies....
+          {texts[lang].search_shimmer}
         </h1>
         
         <div className="flex  overflow-x-scroll no-scrollbar gap-5">

@@ -2,17 +2,20 @@ import React, { useRef } from "react";
 import useGemini from "../utils/hooks/useGemini";
 
 // import temp from "../utils/temp.json";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {
   clearSearchResults,
   updateResult,
 } from "../utils/redux/gptSearchSlice";
 import { setSearchLoader } from "../utils/redux/globalSlice";
+import texts from "../lang/text";
 
 const GptForm = ({searchLoader}) => {
 
   const dispatch = useDispatch();
   const userInput = useRef();
+
+  const lang = useSelector((store) => store.global.lang);
 
   function Handleok(result) {
     dispatch(updateResult(result));
@@ -36,7 +39,7 @@ const GptForm = ({searchLoader}) => {
         ref={userInput}
         className="w-[82%] sm:w-[65%] md:w-[73%] p-2 text-sm sm:text-lg rounded-md placeholder-[#fafafa] bg-gray-700 text-white focus:outline-none focus:ring-1 focus:ring-[#aaaaaa]"
         type="search"
-        placeholder="What would you like to watch ?"
+        placeholder={texts[lang].GPT_Search_placeholder}
         required
       />
     
@@ -46,7 +49,7 @@ const GptForm = ({searchLoader}) => {
         className="bg-red-600 rounded-md  py-0 sm:py-1 px-3 sm:px-5 md:px-6 font-semibold text-white"
       >
         <i className="bi bi-search sm:hidden"></i>
-        <span className="hidden sm:block">Search</span>
+        <span className="hidden sm:block">{texts[lang].search}</span>
       </button>) : (<button
       // {searchLoader && 'disabled'}
         type="button"
@@ -54,7 +57,7 @@ const GptForm = ({searchLoader}) => {
         className=" bg-red-700 rounded-md  py-0 sm:py-1 px-3 sm:px-5 md:px-6 font-semibold text-white"
       >
         <i className="bi bi-search sm:hidden"></i>
-        <span className="hidden sm:block">Search</span>
+        <span className="hidden sm:block">{texts[lang].search}</span>
       </button>)}
       
       <button
@@ -63,7 +66,7 @@ const GptForm = ({searchLoader}) => {
         className="hidden sm:block bg-gray-800 rounded-md  py-0 sm:py-1 px-3 sm:px-5 md:px-6 font-semibold text-white"
       >
         <i className="bi bi-x-circle-fill sm:hidden"></i>{" "}
-        <span className="hidden sm:block">Clear</span>
+        <span className="hidden sm:block">{texts[lang].clear}</span>
       </button>
       {/* {loader && <div className="loader"></div>} */}
     </form>

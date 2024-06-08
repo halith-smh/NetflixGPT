@@ -10,7 +10,7 @@ const { API_KEY, MODEL_NAME, OMDB_KEY } = require("../constants");
 const uesGemini = async (userInput) => {
   
   
-  const GetMovieDeatils = async (movieName) => {
+  const getMovieDeatils = async (movieName) => {
     try {
       const result = await fetch(
         "https://www.omdbapi.com/?t=" + movieName + "&apikey=" + OMDB_KEY
@@ -20,6 +20,7 @@ const uesGemini = async (userInput) => {
       return json;
     } catch (error) {
       console.log(error);
+      return {};
     }
   };
 
@@ -57,18 +58,18 @@ const uesGemini = async (userInput) => {
   });
 
   const PROMPT =
-    "Act as a Movie Recommendation system and suggest some movies for the the query: " +
-    userInput +
-    ". Only give me names of 10 movies in comma seperated like the follwing example result given ahead. Example: Ready Player One, Tron: Legacy, Wreck-It Ralph, Jumanji, The Last Starfighter. No Extra Text Should not be present. Only the movie names should be present.";
+  "Act as a Movie Recommendation system and suggest some movies for the query: " +
+  userInput +
+  ". Only give me names of 10 movies in comma-separated format like the following example result given ahead. Example: Ready Player One, Tron: Legacy, Wreck-It Ralph, Jumanji, The Last Starfighter. No Extra Text Should not be present. Only the movie names should be present.";
+
 
   try {
     const result = await model.generateContent(PROMPT);
-    const response = await result.response;
 
-    // console.log(response.text());
+    const response = result.response;
     const movieNames = response.text();
 
-    const data = movieNames.split(", ").map((movie) => GetMovieDeatils(movie));
+    const data = movieNames.split(", ").map((movie) => getMovieDeatils(movie));
 
     const suggestions = await Promise.all(data);
     return suggestions;

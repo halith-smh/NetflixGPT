@@ -13,9 +13,12 @@ const globalSlice = createSlice({
         },
         setSearchLoader : (state) => {
             state.searchLoader = !state.searchLoader;
-        }
+        },
+        changeLanguage : (state, action) => {
+            state.lang = action.payload;
+        },
     }
 });
 
-export const{SetLoginLoader, setSearchLoader} = globalSlice.actions
+export const{SetLoginLoader, setSearchLoader, changeLanguage} = globalSlice.actions
 export default globalSlice.reducer;
